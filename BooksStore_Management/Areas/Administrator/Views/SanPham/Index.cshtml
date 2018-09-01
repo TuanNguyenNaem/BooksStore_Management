@@ -510,6 +510,36 @@
             ga('create', 'UA-72504830-1', 'auto');
             ga('send', 'pageview');
         }
+
+        //add Tac gia
+        $('[name="tacGia"]').change(function () {
+            if($('[name="tacGia"]').val() === "m")
+            {
+                $('[name="addTacGia"]').removeClass('disabled');
+            }
+            else
+            {
+                $('[name="addTacGia"]').addClass('disabled');
+            }
+        });
+        //add Nha xuat ban
+        $('[name="nhaXuatBan"]').change(function () {
+            if ($('[name="nhaXuatBan"]').val() === "m") {
+                $('[name="addNhaXuatBan"]').removeClass('disabled');
+            }
+            else {
+                $('[name="addNhaXuatBan"]').addClass('disabled');
+            }
+        });
+        //add Danh Muc
+        $('[name="danhMuc"]').change(function () {
+            if ($('[name="danhMuc"]').val() === "m") {
+                $('[name="addDanhMuc"]').removeClass('disabled');
+            }
+            else {
+                $('[name="addDanhMuc"]').addClass('disabled');
+            }
+        });
     </script>
 }
 
