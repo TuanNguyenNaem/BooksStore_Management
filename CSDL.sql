@@ -13,7 +13,7 @@ CREATE TABLE TKNhanVien
 )
 
 INSERT INTO TKNhanVien(TenTK, MatKhau, ChucVu) 
-	VALUES('TuanNV37', '123456', 'Admin'), ('Quynh', '123456', 'Admin')
+	VALUES('TuanNV37', 'e10adc3949ba59abbe56e057f20f883e', 'Admin'), ('Quynh', 'e10adc3949ba59abbe56e057f20f883e', 'Admin')
 
 Create table NhanVien
 (
@@ -47,7 +47,7 @@ Create table TKKhachHang
 )
 
 INSERT INTO TKKhachHang(TenTK, MatKhau) 
-	VALUES('TuanNV37', '123456'), ('Quynh', '123456')
+	VALUES('TuanNV37', 'e10adc3949ba59abbe56e057f20f883e'), ('Quynh', 'e10adc3949ba59abbe56e057f20f883e')
 
 Create table KhachHang
 (

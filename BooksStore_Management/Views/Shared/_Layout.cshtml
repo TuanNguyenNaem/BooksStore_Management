@@ -1,4 +1,7 @@
-﻿
+﻿@using Helpers;
+@{
+
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,8 +67,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="head-t">
                 <ul class="card">
                     <li><a href="wishlist.html"><i class="fa fa-heart" aria-hidden="true"></i>Yêu thích</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#dangNhap"><i class="fa fa-user" aria-hidden="true"></i>Đăng nhập</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#dangKy"><i class="fa fa-arrow-right" aria-hidden="true"></i>Đăng ký</a></li>
+                    @if (Helpers.SessionHelper.IsAuthenticated)
+                    {
+                        Helpers.UserSession username = (Helpers.UserSession)HttpContext.Current.Session["loggedUser"];
+                        <li><a href="#" data-toggle="modal" data-target="#dangNhap"><i class="fa fa-user" aria-hidden="true"></i>Xin chào: @username.UserName</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#dangKy"><i class="fa fa-arrow-right" aria-hidden="true"></i>Đăng xuất</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="#" data-toggle="modal" data-target="#dangNhap"><i class="fa fa-user" aria-hidden="true"></i>Đăng nhập</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#dangKy"><i class="fa fa-arrow-right" aria-hidden="true"></i>Đăng ký</a></li>
+                    }
                     <li><a href="about.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>Lich sử mua</a></li>
                     <li><a href="shipping.html"><i class="fa fa-ship" aria-hidden="true"></i>Giao hàng</a></li>
                 </ul>
@@ -116,8 +128,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                                         </div>
                                         @*<div class="col-sm-3 w3l">
-                                            <a href="kitchen.html"><img src="~/Content/images/me.png" class="img-responsive" alt=""></a>
-                                        </div>*@
+                                                <a href="kitchen.html"><img src="~/Content/images/me.png" class="img-responsive" alt=""></a>
+                                            </div>*@
                                         <div class="clearfix"></div>
                                     </div>
                                 </ul>
@@ -159,8 +171,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             </ul>
                                         </div>
                                         @*<div class="col-sm-3 w3l">
-                                            <a href="care.html"><img src="~/Content/images/me1.png" class="img-responsive" alt=""></a>
-                                        </div>*@
+                                                <a href="care.html"><img src="~/Content/images/me1.png" class="img-responsive" alt=""></a>
+                                            </div>*@
                                         <div class="clearfix"></div>
                                     </div>
                                 </ul>
@@ -201,8 +213,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             </ul>
                                         </div>
                                         @*<div class="col-sm-3 w3l">
-                                            <a href="hold.html"><img src="~/Content/images/me2.png" class="img-responsive" alt=""></a>
-                                        </div>*@
+                                                <a href="hold.html"><img src="~/Content/images/me2.png" class="img-responsive" alt=""></a>
+                                            </div>*@
                                         <div class="clearfix"></div>
                                     </div>
                                 </ul>
@@ -324,8 +336,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!-- //footer-->
     <!-- smooth scrolling -->
-   
-
     <!-- product -->
     <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

@@ -1,0 +1,39 @@
+﻿
+<!doctype html>
+<html lang="en-US">
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Login</title>
+
+    <link href="~/Areas/Administrator/Content/Dangnhap/dangNhap.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div id="login">
+
+        <h2><span class="fontawesome-lock"></span>Sign In</h2>
+
+        <form action="/DangNhap/Login" method="POST">
+
+            <fieldset>
+
+                <p><label >Tên đăng nhập <label style="color: red">*</label></label></p>
+                <p><input  type="text" id="tenDangNhap" name="tenDangNhap"  placeholder="Nhập tên tài khoản">
+
+                <p><label for="password">Mật khẩu <label style="color: red">*</label></label></p>
+                <p><input type="password" id="matKhau" name="matKhau" placeholder="Nhập mật khẩu">
+
+                <p><input type="submit" class="btn btn-primary" value="Đăng nhập"></p>
+
+            </fieldset>
+
+        </form>
+
+    </div> <!-- end login -->
+
+</body>
+</html>

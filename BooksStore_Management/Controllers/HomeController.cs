@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Models;
-using Heppers;
+using Helpers;
 
 namespace BooksStore_Management.Controllers
 {
@@ -22,10 +22,10 @@ namespace BooksStore_Management.Controllers
         [HttpPost]
         public ActionResult DangNhap(string tenDN, string matKhau, string url)
         {
-            var users = context.TKKhachHang.ToList().FirstOrDefault(c => c.TenTK == tenDN && c.MatKhau == matKhau);
+            var users = context.TKKhachHang.ToList().FirstOrDefault(c => c.TenTK == tenDN && c.MatKhau.ToUpper() == EncryptedMD5.GenerateHash(matKhau).ToUpper());
             if (users != null)
             {
-               // SessionHepper.SetSession(new Session() { TenDangNhap = users.TenTK });
+                SessionHelper.SetSession(new UserSession() { UserName = users.TenTK });
                 return Json(new { Status = true, Message = "Đăng nhập thành công!" }, JsonRequestBehavior.AllowGet);
 
             }
