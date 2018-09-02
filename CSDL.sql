@@ -122,6 +122,18 @@ Create table CTSach
 )
 ALTER TABLE CTSach ADD CONSTRAINT pk_cts_s FOREIGN KEY (MaS) REFERENCES Sach(MaS)
 
+create table AnhSach
+(
+	MaS int Primary key,
+	Anh1 varchar(300),
+	Anh2 varchar(300),
+	Anh3 varchar(300),
+	Anh4 varchar(300),
+	Anh5 varchar(300)
+)
+ALTER TABLE AnhSach ADD CONSTRAINT pk_as_s FOREIGN KEY (MaS) REFERENCES Sach(MaS)
+
+
 Create table Kho
 (
 	MaS int Not null,
