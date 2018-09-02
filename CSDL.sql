@@ -1,4 +1,4 @@
-Create Database BookStore_QueenMin
+﻿Create Database BookStore_QueenMin
 Go
 
 Use BookStore_QueenMin
@@ -12,6 +12,9 @@ CREATE TABLE TKNhanVien
 	ChucVu nvarchar(50) NOT NULL
 )
 
+INSERT INTO TKNhanVien(TenTK, MatKhau, ChucVu) 
+	VALUES('TuanNV37', '123456', 'Admin'), ('Quynh', '123456', 'Admin')
+
 Create table NhanVien
 (
 	MaNV int Primary key,
@@ -24,7 +27,9 @@ Create table NhanVien
 	TinhTrang nvarchar(20)NOT NULL
 )
 ALTER TABLE NhanVien ADD CONSTRAINT pk_nv_tk FOREIGN KEY (MaNV) REFERENCES TKNhanVien(MaNV)
-
+INSERT INTO NhanVien(MaNV, TenNV, GioiTinh, DiaChi, Sdt, NgaySinh, NgayDen, TinhTrang)
+			VALUES(1, N'Nguyễn Văn Tuấn', N'Nam', N'Thanh Hóa', '01635363536', '1995-1-1', '2018-9-2', N'Đang làm'),
+				  (2, N'Quỳnh', N'Nữ', N'Thái Bình', '01635363344', '1996-1-1', '2018-9-2', N'Đang làm')
 
 CREATE TABLE Vip
 (
@@ -40,6 +45,9 @@ Create table TKKhachHang
 	TenTK varchar(30) Not Null Unique,
 	MatKhau nvarchar(100) Not null
 )
+
+INSERT INTO TKKhachHang(TenTK, MatKhau) 
+	VALUES('TuanNV37', '123456'), ('Quynh', '123456')
 
 Create table KhachHang
 (

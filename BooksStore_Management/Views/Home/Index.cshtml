@@ -21,8 +21,64 @@
     </div>
 </div>
 @section scripts{
-<script>window.jQuery || document.write('<script src="~/Content/js/jquery-1.11.1.min.js"><\/script>')</script>
-<script src="~/Content/js/jquery.vide.min.js"></script>
+    <script>window.jQuery || document.write('<script src="~/Content/js/jquery-1.11.1.min.js"><\/script>')</script>
+    <script src="~/Content/js/jquery.vide.min.js"></script>
+
+    <script>
+        //Validate dang nhap
+        $('[name="tenDangNhap"]').keydown(function () {
+            $('[name="tenDangNhap"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        })
+        $('[name="matKhau"]').keydown(function () {
+            $('[name="matKhau"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        })
+        function validate() {
+            var result = true;
+            if ($('[name="tenDangNhap"]').val() == "") {
+                $('[name="tenDangNhap"]').css("border-color", "red");
+                result = false;
+            }
+            if ($('[name="matKhau"]').val() == "") {
+                $('[name="matKhau"]').css("border-color", "red");
+                result = false;
+            }
+            return result;
+        }
+        //dang nhap
+        $(document).ready(function () {
+            $('[name="dangNhap"]').click(function (e) {
+                e.preventDefault();
+                if (!validate())
+                    return false;
+                else {
+                    var data = {
+                        tenDN: $('[name="tenDangNhap"]').val(),
+                        matKhau: $('[name="matKhau"]').val(),
+                        url: $('[name="returnUrl"]').val()
+                    };
+                    $.ajax({
+                        url: "/Home/DangNhap",
+                        type: 'POST',
+                        dataType: "json",
+                        data: data,
+                        success: function (result) {
+                            if (result.Status) {
+                                if ($("[name=returnUrl]").val() == "") {
+                                    window.location.href = "/";
+                                } else {
+                                    window.location.href = $("[name=returnUrl]").val();
+                                }
+                            } else {
+                                //sai tên or pass
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+
 }
 
 <!--content-->
@@ -150,7 +206,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab2">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -251,7 +307,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab3">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -477,7 +533,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab2">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -578,7 +634,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab3">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -804,7 +860,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab2">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -905,7 +961,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab3">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -1130,7 +1186,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab2">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -1231,7 +1287,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab3">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -1333,8 +1389,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
         <div style="padding-top: 40px" class="spec ">
             <h3>Bạn chọn gần đây</h3>
             <div class="ser-t">
@@ -1455,7 +1511,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab2">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -1556,7 +1612,7 @@
                     </div>
                 </div>
                 <div class="tab-pane  text-style" id="tab3">
-                    <div class=" con-w3l">
+                    <div class="con-w3l">
                         <div class="col-md-3 m-wthree">
                             <div class="col-m">
                                 <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -1751,7 +1807,7 @@
                 <b class="line"></b>
             </div>
         </div>
-        <div class=" con-w3l">
+        <div class="con-w3l">
             <div class="col-md-3 m-wthree">
                 <div class="col-m">
                     <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
@@ -2524,4 +2580,5 @@
         </div>
     </div>
 </div>
+
 

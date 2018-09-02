@@ -8,5 +8,6 @@ namespace Heppers
 {
     public class Session
     {
+        public string TenDangNhap { get; set; }
     }
 }

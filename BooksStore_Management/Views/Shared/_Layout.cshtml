@@ -64,8 +64,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="head-t">
                 <ul class="card">
                     <li><a href="wishlist.html"><i class="fa fa-heart" aria-hidden="true"></i>Yêu thích</a></li>
-                    <li><a href="login.html"><i class="fa fa-user" aria-hidden="true"></i>Đăng nhập</a></li>
-                    <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>Đăng ký</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#dangNhap"><i class="fa fa-user" aria-hidden="true"></i>Đăng nhập</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#dangKy"><i class="fa fa-arrow-right" aria-hidden="true"></i>Đăng ký</a></li>
                     <li><a href="about.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>Lich sử mua</a></li>
                     <li><a href="shipping.html"><i class="fa fa-ship" aria-hidden="true"></i>Giao hàng</a></li>
                 </ul>
@@ -301,12 +301,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h2><a href="index.html"><b>N<br>E<br>W</b>Queen Min<span>Books Store</span></a></h2>
                 <p class="fo-para">Sách là nơi lưu giữ nền văn minh. Không có sách, lịch sử trầm lặng, văn chương buồn chán.</p>
                 <ul class="social-fo">
-                    <li><a href="#" class=" face"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class=" twi"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class=" pin"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class=" dri"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="face"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="twi"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="pin"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="dri"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
                 </ul>
-                <div class=" address">
+                <div class="address">
                     <div class="col-md-4 fo-grid1">
                         <p><i class="fa fa-home" aria-hidden="true"></i>31 Phan Đình Giót, Thanh Xuân, Hà Nội.</p>
                     </div>
@@ -324,64 +324,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!-- //footer-->
     <!-- smooth scrolling -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            /*
-                var defaults = {
-                containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
-                };
-            */
-            $().UItoTop({ easingType: 'easeOutQuart' });
-        });
-    </script>
-    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-    <!-- //smooth scrolling -->
-    <!-- for bootstrap working -->
-    <script src="~/Content/js/bootstrap.js"></script>
-    <!-- //for bootstrap working -->
-    <script src="~/Content/js/jquery.mycart.js"></script>
-    <script type="text/javascript">
-        $(function () {
-
-            var goToCartIcon = function ($addTocartBtn) {
-                var $cartIcon = $(".my-cart-icon");
-                var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({ "position": "fixed", "z-index": "999" });
-                $addTocartBtn.prepend($image);
-                var position = $cartIcon.position();
-                $image.animate({
-                    top: position.top,
-                    left: position.left
-                }, 500, "linear", function () {
-                    $image.remove();
-                });
-            }
-
-            $('.my-cart-btn').myCart({
-                classCartIcon: 'my-cart-icon',
-                classCartBadge: 'my-cart-badge',
-                affixCartIcon: true,
-                checkoutCart: function (products) {
-                    $.each(products, function () {
-                        console.log(this);
-                    });
-                },
-                clickOnAddToCart: function ($addTocart) {
-                    goToCartIcon($addTocart);
-                },
-                getDiscountPrice: function (products) {
-                    var total = 0;
-                    $.each(products, function () {
-                        total += this.quantity * this.price;
-                    });
-                    return total * 1;
-                }
-            });
-
-        });
-    </script>
+   
 
     <!-- product -->
     <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -1151,6 +1094,71 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
+
+    @Html.Partial("PartialViewDangNhap");
+    @Html.Partial("PartialViewDangKy");
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+                };
+            */
+            $().UItoTop({ easingType: 'easeOutQuart' });
+        });
+    </script>
+    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    <!-- //smooth scrolling -->
+    <!-- for bootstrap working -->
+    <script src="~/Content/js/bootstrap.js"></script>
+    <!-- //for bootstrap working -->
+    <script src="~/Content/js/jquery.mycart.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var goToCartIcon = function ($addTocartBtn) {
+                var $cartIcon = $(".my-cart-icon");
+                var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({ "position": "fixed", "z-index": "999" });
+                $addTocartBtn.prepend($image);
+                var position = $cartIcon.position();
+                $image.animate({
+                    top: position.top,
+                    left: position.left
+                }, 500, "linear", function () {
+                    $image.remove();
+                });
+            }
+
+            $('.my-cart-btn').myCart({
+                classCartIcon: 'my-cart-icon',
+                classCartBadge: 'my-cart-badge',
+                affixCartIcon: true,
+                checkoutCart: function (products) {
+                    $.each(products, function () {
+                        console.log(this);
+                    });
+                },
+                clickOnAddToCart: function ($addTocart) {
+                    goToCartIcon($addTocart);
+                },
+                getDiscountPrice: function (products) {
+                    var total = 0;
+                    $.each(products, function () {
+                        total += this.quantity * this.price;
+                    });
+                    return total * 1;
+                }
+            });
+
+        });
+
+        //Dang nhap
+
+    </script>
 </body>
 </html>
