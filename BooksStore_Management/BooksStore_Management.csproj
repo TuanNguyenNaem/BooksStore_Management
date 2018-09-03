@@ -201,6 +201,7 @@
     <Compile Include="Areas\Administrator\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DangNhapController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DanhMucController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\NhaCungCapController.cs" />
     <Compile Include="Areas\Administrator\Controllers\SanPhamController.cs" />
     <Compile Include="Areas\Administrator\Controllers\TacGiaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -384,6 +385,9 @@
     <Content Include="Areas\Administrator\Views\DanhMuc\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\DanhMuc\PartialViewAddDanhMuc.cshtml" />
     <Content Include="Areas\Administrator\Views\DanhMuc\ChinhSua.cshtml" />
+    <Content Include="Areas\Administrator\Views\NhaCungCap\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\NhaCungCap\PartialViewAddNhaCungCap.cshtml" />
+    <Content Include="Areas\Administrator\Views\NhaCungCap\ChinhSua.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
