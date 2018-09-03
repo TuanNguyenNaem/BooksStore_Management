@@ -1,0 +1,121 @@
+﻿@model List<Models.NhaXuatBan>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<main class="app-content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Danh sách nhà xuất bản</h1>
+            <p>Thông tin nhà xuất bản</p>
+        </div>
+        <div class="app-breadcrumb breadcrumb side">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addNhaXuatBan">Thêm mới</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>Tên nhà cung cấp</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.TenNXB</td>
+                                    <td>@item.Sdt</td>
+                                    <td>@item.DiaChi</td>
+                                    <td>
+                                        <a href="/Administrator/NhaXuatBan/ChinhSua/@item.MaNXB" class="btn btn-primary" name="sua">Sửa</a>
+                                        <a href="/Administrator/NhaXuatBan/Xoa/@item.MaNXB" class="btn btn-danger" name="sua">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@Html.Partial("PartialViewAddNhaXuatBan")
+@section scripts{
+    <script src="~/Areas/Administrator/Content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Administrator/Content/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script type="text/javascript">
+        if (document.location.hostname == 'pratikborsadiya.in') {
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-72504830-1', 'auto');
+            ga('send', 'pageview');
+        }
+
+        @*validate add nhà xuất bản*@
+        function validationAddNhaXuatBan() {
+            if ($('[name="tenNhaXuatBan"]').val() == "") {
+                $('[name="tenNhaXuatBan"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="soDienThoai"]').val() == "") {
+                $('[name="soDienThoai"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="diaChi"]').val() == "") {
+                $('[name="diaChi"]').css('border-color', 'red');
+                return false;
+            }
+            return true;
+        }
+        $('[name="tenNhaXuatBan"]').keyup(function () {
+            $('[name="tenNhaXuatBan"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="soDienThoai"]').keyup(function () {
+            $('[name="soDienThoai"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="diaChi"]').keyup(function () {
+            $('[name="diaChi"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+
+        //Add nhà cung cấp
+        $('[name="addNhaCungCap"]').click(function () {
+            if (!validationAddNhaXuatBan())
+                return false
+            else {
+                var data = {
+                    tenNhaXuatBan: $('[name="tenNhaXuatBan"]').val(),
+                    soDienThoai: $('[name="soDienThoai"]').val(),
+                    diaChi: $('[name="diaChi"]').val()
+                };
+                $.ajax({
+                    url: "/NhaXuatBan/ThemMoi",
+                    type: 'POST',
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if (result.Status) {
+                            window.location.href = "/Administrator/NhaXuatBan/Index";
+                        } else {
+                            alert("Trùng tên");
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}
+
