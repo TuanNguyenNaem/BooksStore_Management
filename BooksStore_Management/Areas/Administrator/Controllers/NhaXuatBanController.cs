@@ -8,6 +8,7 @@ using Helpers;
 
 namespace BooksStore_Management.Areas.Administrator.Controllers
 {
+    [LoginRequired]
     public class NhaXuatBanController : Controller
     {
         Quynh_K8A_BookStoreManagement_DbContext context;
