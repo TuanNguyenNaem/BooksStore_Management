@@ -12,7 +12,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Vali Admin - Free Bootstrap 4 Admin Template</title>
+    <title>Queen Min - Administrator</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -135,6 +135,9 @@
                 </ul>
             </li>
             <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Khách hàng</span></a></li>
+            <li><a class="app-menu__item" href="/Administrator/TacGia/Index"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Tác giả</span></a></li>
+            <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Danh mục</span></a></li>
+            <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Nhà cung cấp</span></a></li>
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Đơn hàng</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
@@ -142,6 +145,14 @@
                     <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom Components</a></li>
                     <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
                     <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Chi tiết khác</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Độ tuổi</a></li>
+                    <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Khổ giấy</a></li>
+                    <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Loại bìa</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -175,7 +186,7 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="~/Areas/Administrator/Content/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
-    <script src="~/Areas/Administrator/Content/js/plugins/chart.js"></script>
+    @*<script src="~/Areas/Administrator/Content/js/plugins/chart.js"></script>*@
     <script type="text/javascript">
         var data = {
             labels: ["January", "February", "March", "April", "May"],
@@ -202,26 +213,6 @@
                 }
             ]
         };
-        var pdata = [
-          {
-              value: 300,
-              color: "#46BFBD",
-              highlight: "#5AD3D1",
-              label: "Complete"
-          },
-          {
-              value: 50,
-              color: "#F7464A",
-              highlight: "#FF5A5E",
-              label: "In-Progress"
-          }
-        ]
-
-        var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-        var lineChart = new Chart(ctxl).Line(data);
-
-        var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-        var pieChart = new Chart(ctxp).Pie(pdata);
     </script>
     <!-- Google analytics script-->
     <script type="text/javascript">

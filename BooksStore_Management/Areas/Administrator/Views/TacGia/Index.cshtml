@@ -1,0 +1,112 @@
+﻿@model List<Models.TacGia>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<main class="app-content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Danh sách tác giả</h1>
+            <p>Thông tin tác giả</p>
+        </div>
+        <div class="app-breadcrumb breadcrumb side">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addTacGia">Thêm mới</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>Tên tác giả</th>
+                                <th>Giới tính</th>
+                                <th>Ngày sinh</th>
+                                <th>Địa chỉ</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.TenTG</td>
+                                    <td>@item.GioiTinh</td>
+                                    <td>@item.NgaySinh.ToString().Substring(0, @item.NgaySinh.ToString().Length - 8)</td>
+                                    <td>@item.DiaChi</td>
+                                    <td>
+                                        <a href="/Administrator/TacGia/ChinhSua/@item.MaTG" class="btn btn-primary" name="sua">Sửa</a>
+                                        <a href="/Administrator/TacGia/Xoa/@item.MaTG" class="btn btn-danger" name="sua">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<input type="hidden" name="hidden" />
+
+@Html.Partial("PartialViewAddTacGia")
+@section scripts{
+
+    <script src="~/Areas/Administrator/Content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Administrator/Content/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script type="text/javascript">
+        if (document.location.hostname == 'pratikborsadiya.in') {
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-72504830-1', 'auto');
+            ga('send', 'pageview');
+        }
+
+        @*validate add tác giả*@
+        function validationAddTacGia() {
+            if ($('[name="tenTacGia"]').val() == "") {
+                $('[name="tenTacGia"]').css('border-color', 'red');
+                return false;
+            }
+            return true;
+        }
+        $('[name="tenTacGia"]').keyup(function () {
+            $('[name="tenTacGia"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="addTacGia"]').click(function () {
+            if (!validationAddTacGia())
+                return false
+            else
+            {
+                var data = {
+                    tenTacGia: $('[name="tenTacGia"]').val(),
+                    gioiTinh: $('[name="gioiTinh"]').val(),
+                    ngaySinh: $('[name="ngaySinh"]').val(),
+                    diaChi: $('[name="diaChi"]').val()
+                };
+                $.ajax({
+                    url: "/TacGia/ThemMoi",
+                    type: 'POST',
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if (result.Status) {
+                                window.location.href = "/Administrator/TacGia/Index";
+                        } else {
+                            alert("Trùng tên");
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+}
+
