@@ -133,6 +133,13 @@ create table AnhSach
 )
 ALTER TABLE AnhSach ADD CONSTRAINT pk_as_s FOREIGN KEY (MaS) REFERENCES Sach(MaS)
 
+create table DanhGiaSach
+(
+	MaS int Primary key,
+	Sao float not null
+)
+ALTER TABLE DanhGiaSach ADD CONSTRAINT pk_dgs_s FOREIGN KEY (MaS) REFERENCES Sach(MaS)
+
 
 Create table Kho
 (

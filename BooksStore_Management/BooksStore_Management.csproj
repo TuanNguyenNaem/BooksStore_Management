@@ -373,6 +373,9 @@
     <Content Include="Areas\Administrator\Views\SanPham\PartialViewAdd.cshtml" />
     <Content Include="Areas\Administrator\Views\DangNhap\Index.cshtml" />
     <Content Include="Areas\Administrator\Content\Dangnhap\js_DangNhap.js" />
+    <Content Include="Areas\Administrator\Views\SanPham\PartialViewAddTacGia.cshtml" />
+    <Content Include="Areas\Administrator\Views\SanPham\PartialViewAddNhaXuatBan.cshtml" />
+    <Content Include="Areas\Administrator\Views\SanPham\PartialViewAddDanhMuc.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

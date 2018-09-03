@@ -1,0 +1,22 @@
+﻿
+
+<div id="addDanhMuc" class="row d-none">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Tên danh mục</label>
+            <input type="text" class="form-control" name="tenDanhMuc" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Ngày tạo</label>
+            <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy/MM/dd")" name="ngayTao" readonly/>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Tình trạng</label>
+            <input type="date" class="form-control" value="Hoạt động" name="tinhTrang"  readonly/>
+        </div>
+    </div>
+</div>

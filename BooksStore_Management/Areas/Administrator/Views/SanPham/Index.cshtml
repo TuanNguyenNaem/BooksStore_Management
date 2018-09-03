@@ -515,29 +515,31 @@
         $('[name="tacGia"]').change(function () {
             if($('[name="tacGia"]').val() === "m")
             {
-                $('[name="addTacGia"]').removeClass('disabled');
+                $("#addTacGia").removeClass('d-none');
             }
             else
             {
-                $('[name="addTacGia"]').addClass('disabled');
+                $("#addTacGia").addClass('d-none');
             }
         });
+
+
         //add Nha xuat ban
         $('[name="nhaXuatBan"]').change(function () {
             if ($('[name="nhaXuatBan"]').val() === "m") {
-                $('[name="addNhaXuatBan"]').removeClass('disabled');
+                $("#addNhaXuatBan").removeClass('d-none');
             }
             else {
-                $('[name="addNhaXuatBan"]').addClass('disabled');
+                $("#addNhaXuatBan").addClass('d-none');
             }
         });
         //add Danh Muc
         $('[name="danhMuc"]').change(function () {
             if ($('[name="danhMuc"]').val() === "m") {
-                $('[name="addDanhMuc"]').removeClass('disabled');
+                $("#addDanhMuc").removeClass('d-none');
             }
             else {
-                $('[name="addDanhMuc"]').addClass('disabled');
+                $("#addDanhMuc").addClass('d-none');
             }
         });
     </script>
