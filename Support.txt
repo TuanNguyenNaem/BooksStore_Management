@@ -5,8 +5,8 @@ Edit connectionstring.
 Run program.
 
 url:
-localhost:xxxxx/Administrator/DangNhap/Index (Page Administrator)
-localhost:xxxxx (Page Customers)
+localhost:xxxxx/Administrator/DangNhap/Index (Administrator page)
+localhost:xxxxx (Customers page)
 
 Login
 username: TuanNV37

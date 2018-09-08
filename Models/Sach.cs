@@ -28,6 +28,8 @@ namespace Models
 
         public int MaNXB { get; set; }
 
+        public virtual AnhSach AnhSach { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHoaDonNhap> CTHoaDonNhap { get; set; }
 
@@ -35,6 +37,8 @@ namespace Models
         public virtual ICollection<CTHoaDonXuat> CTHoaDonXuat { get; set; }
 
         public virtual CTSach CTSach { get; set; }
+
+        public virtual DanhGiaSach DanhGiaSach { get; set; }
 
         public virtual DanhMuc DanhMuc { get; set; }
 

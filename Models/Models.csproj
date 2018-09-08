@@ -51,9 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnhSach.cs" />
     <Compile Include="CTHoaDonNhap.cs" />
     <Compile Include="CTHoaDonXuat.cs" />
     <Compile Include="CTSach.cs" />
+    <Compile Include="DanhGiaSach.cs" />
     <Compile Include="DanhMuc.cs" />
     <Compile Include="DoTuoi.cs" />
     <Compile Include="HoaDonNhap.cs" />

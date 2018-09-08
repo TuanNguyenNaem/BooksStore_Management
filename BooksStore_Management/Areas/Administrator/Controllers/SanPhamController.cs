@@ -38,16 +38,35 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
         [HttpPost]
         public ActionResult Create(
             string tenSach,
-            int tacGia,
-            int nhaXuatBan,
+            string tacGia,
+
+            bool add_TacGia,
+            string tenTacGia,
+            string gioiTinhTG,
+            DateTime? ngaySinhTG,
+            string diaChiTG,
+
+            string nhaXuatBan,
+
+            bool add_NhaXuatBan,
+            string tenNhaXuatBan,
+            string diaChiNXB,
+            string soDienThoaiNXB,
+
             int doTuoi,
-            int danhMuc,
+            string danhMuc,
+
+            bool add_DanhMuc,
+            string tenDanhMuc,
+            DateTime? ngayTaoDM,
+            string tinhTrangDM,
+
             string loaiBia,
             string khoGiay,
             DateTime ngayXuatBan,
             string loaiGiay,
-            string soTrang,
-            string gia)
+            int soTrang,
+            int gia)
         {
             if (Request.Files.Count > 0)
             {
@@ -65,6 +84,80 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
                         image[i] = filename;
                     }
                 }
+                var sach = new Sach();
+                var ctSach = new CTSach();
+                var anhSach = new AnhSach();
+                sach.MaDT = doTuoi;
+                if (add_TacGia)
+                {
+                    var tac_Gia = new TacGia()
+                    {
+                        TenTG = tenTacGia,
+                        GioiTinh = gioiTinhTG,
+                        NgaySinh = ngaySinhTG,
+                        DiaChi = diaChiTG
+                    };
+                    context.TacGia.Add(tac_Gia);
+                    context.SaveChanges();
+                    sach.MaTG = tac_Gia.MaTG;
+                }
+                else
+                {
+                    sach.MaTG = int.Parse(tacGia);
+                }
+                if (add_NhaXuatBan)
+                {
+                    var nha_Xuat_Ban = new NhaXuatBan()
+                    {
+                        TenNXB = tenNhaXuatBan,
+                        DiaChi = diaChiNXB,
+                        Sdt = soDienThoaiNXB
+                    };
+                    context.NhaXuatBan.Add(nha_Xuat_Ban);
+                    context.SaveChanges();
+                    sach.MaNXB = nha_Xuat_Ban.MaNXB;
+                }
+                else
+                {
+                    sach.MaNXB = int.Parse(nhaXuatBan);
+                }
+                if (add_DanhMuc)
+                {
+                    var danh_Muc = new DanhMuc()
+                    {
+                        TenDM = tenDanhMuc,
+                        NgayTao = DateTime.Today,
+                        TinhTrang = "Hoạt động"
+                    };
+                    context.DanhMuc.Add(danh_Muc);
+                    context.SaveChanges();
+                    sach.MaDM = danh_Muc.MaDM;
+                }
+                else
+                {
+                    sach.MaDM = int.Parse(danhMuc);
+                }
+                context.Sach.Add(sach);
+                context.SaveChanges();
+                ctSach.MaS = sach.MaS;
+
+                anhSach.MaS = sach.MaS;
+                ctSach.TenS = tenSach;
+                ctSach.LoaiBia = loaiBia;
+                ctSach.NgayXuatBan = ngayXuatBan;
+                ctSach.Kho = khoGiay;
+                ctSach.SoTrang = soTrang;
+                ctSach.Gia = gia;
+                ctSach.LoaiGiay = loaiGiay;
+                context.CTSach.Add(ctSach);
+                context.SaveChanges();
+
+                anhSach.Anh1 = "~/Content/Images/" + image[0];
+                anhSach.Anh2 = "~/Content/Images/" + image[1];
+                anhSach.Anh3 = "~/Content/Images/" + image[2];
+                anhSach.Anh4 = "~/Content/Images/" + image[3];
+                anhSach.Anh5 = "~/Content/Images/" + image[4];
+                context.AnhSach.Add(anhSach);
             }
             return Redirect("/Administrator/SanPham");
         }

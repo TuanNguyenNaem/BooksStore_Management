@@ -12,9 +12,11 @@ namespace Models
         {
         }
 
+        public virtual DbSet<AnhSach> AnhSach { get; set; }
         public virtual DbSet<CTHoaDonNhap> CTHoaDonNhap { get; set; }
         public virtual DbSet<CTHoaDonXuat> CTHoaDonXuat { get; set; }
         public virtual DbSet<CTSach> CTSach { get; set; }
+        public virtual DbSet<DanhGiaSach> DanhGiaSach { get; set; }
         public virtual DbSet<DanhMuc> DanhMuc { get; set; }
         public virtual DbSet<DoTuoi> DoTuoi { get; set; }
         public virtual DbSet<HoaDonNhap> HoaDonNhap { get; set; }
@@ -33,6 +35,26 @@ namespace Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AnhSach>()
+                .Property(e => e.Anh1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AnhSach>()
+                .Property(e => e.Anh2)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AnhSach>()
+                .Property(e => e.Anh3)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AnhSach>()
+                .Property(e => e.Anh4)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AnhSach>()
+                .Property(e => e.Anh5)
+                .IsUnicode(false);
+
             modelBuilder.Entity<CTSach>()
                 .Property(e => e.Kho)
                 .IsUnicode(false);
@@ -111,6 +133,10 @@ namespace Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Sach>()
+                .HasOptional(e => e.AnhSach)
+                .WithRequired(e => e.Sach);
+
+            modelBuilder.Entity<Sach>()
                 .HasMany(e => e.CTHoaDonNhap)
                 .WithRequired(e => e.Sach)
                 .WillCascadeOnDelete(false);
@@ -122,6 +148,10 @@ namespace Models
 
             modelBuilder.Entity<Sach>()
                 .HasOptional(e => e.CTSach)
+                .WithRequired(e => e.Sach);
+
+            modelBuilder.Entity<Sach>()
+                .HasOptional(e => e.DanhGiaSach)
                 .WithRequired(e => e.Sach);
 
             modelBuilder.Entity<Sach>()
