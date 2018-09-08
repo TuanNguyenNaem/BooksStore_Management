@@ -1,0 +1,14 @@
+Clone and open program.
+Open SQL server and run file 'CSDL.sql'.
+Open file Web.config (BookStore_Management).
+Edit connectionstring.
+Run program.
+
+url:
+localhost:xxxxx/Administrator/DangNhap/Index (Page Administrator)
+localhost:xxxxx (Page Customers)
+
+Login
+username: TuanNV37
+password: 123456
+

@@ -219,6 +219,7 @@
     <Content Include="Areas\Administrator\Content\css\main.css" />
     <Content Include="Areas\Administrator\Content\Dangnhap\bootstrap.css" />
     <Content Include="Areas\Administrator\Content\Dangnhap\dangNhap.css" />
+    <Content Include="Areas\Administrator\Content\img\co.jpg" />
     <Content Include="Areas\Administrator\Content\js\bootstrap.min.js" />
     <Content Include="Areas\Administrator\Content\js\jquery-3.2.1.min.js" />
     <Content Include="Areas\Administrator\Content\js\main.js" />
@@ -374,7 +375,6 @@
     <Content Include="Areas\Administrator\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administrator\Views\AdminHome\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\SanPham\Index.cshtml" />
-    <Content Include="Areas\Administrator\Views\SanPham\PartialViewAdd.cshtml" />
     <Content Include="Areas\Administrator\Views\DangNhap\Index.cshtml" />
     <Content Include="Areas\Administrator\Content\Dangnhap\js_DangNhap.js" />
     <Content Include="Areas\Administrator\Views\SanPham\PartialViewAddTacGia.cshtml" />
@@ -392,6 +392,7 @@
     <Content Include="Areas\Administrator\Views\NhaXuatBan\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\NhaXuatBan\PartialViewAddNhaXuatBan.cshtml" />
     <Content Include="Areas\Administrator\Views\NhaXuatBan\ChinhSua.cshtml" />
+    <Content Include="Areas\Administrator\Views\SanPham\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -421,6 +422,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Models\" />
+    <Folder Include="Content\Picture\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

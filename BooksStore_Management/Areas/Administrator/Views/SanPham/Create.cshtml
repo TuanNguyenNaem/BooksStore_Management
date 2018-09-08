@@ -1,0 +1,311 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    List<Models.TacGia> tacGia = ViewBag.TacGia;
+    List<Models.NhaXuatBan> nhaXuatBan = ViewBag.NhaXuatBan;
+    List<Models.DanhMuc> danhMuc = ViewBag.DanhMuc;
+    List<Models.DoTuoi> doTuoi = ViewBag.DoTuoi;
+}
+
+<style>
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .btn-add {
+        border: 2px solid gray;
+        color: gray;
+        background-color: white;
+        padding: 50px 30px;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .upload-btn-wrapper input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .delete{
+        width:100%; 
+        height: 20px; 
+        padding: 0% 43%; 
+        border-radius: 5px; 
+        color:white; 
+        background-color:red; 
+        text-align: center;
+    }
+</style>
+<main class="app-content">
+    <div class="container">
+        <form action="/SanPham/Create" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputEmail1">Tên sách</label>
+                    <input class="form-control" id="tenSach" name="tenSach" type="text" placeholder="Nhập tên sách">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputEmail1">Tác giả</label>
+                    <select class="form-control" id="tacGia" name="tacGia">
+                        <option value="0">Chọn tác giả</option>
+                        @foreach (var item in tacGia)
+                        {
+                            <option value="@item.MaTG">@item.TenTG</option>
+                        }
+                        <option value="m">Thêm mới</option>
+                    </select>
+                </div>
+                <input type="hidden" name="addTacGia" value="false" />
+            </div>
+            @Html.Partial("PartialViewAddTacGia")
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nhà xuất bản</label>
+                        <select class="form-control" name="nhaXuatBan">
+                            <option value="0">Chọn...</option>
+                            @foreach (var item in nhaXuatBan)
+                            {
+                                <option value="@item.MaNXB">@item.TenNXB</option>
+                            }
+                            <option value="m">Thêm mới</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="addNhaXuatBan" value="false" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputEmail1">Độ tuổi</label>
+                    <select class="form-control" name="doTuoi">
+                        <option value="0">Chọn...</option>
+                        @foreach (var item in doTuoi)
+                        {
+                            <option value="@item.MaDT">@item.BatDau - @item.KetThuc</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Danh mục</label>
+                        <select class="form-control" name="danhMuc">
+                            <option value="0">Chọn...</option>
+                            @foreach (var item in danhMuc)
+                            {
+                                <option value="@item.MaDM">@item.TenDM</option>
+                            }
+                            <option value="m">Thêm mới</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="addDanhMuc" value="false" />
+                </div>
+            </div>
+            @Html.Partial("PartialViewAddNhaXuatBan")
+            @Html.Partial("PartialViewAddDanhMuc")
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="exampleInputEmail1">Loại bìa</label>
+                    <select class="form-control" name="loaiBia">
+                        <option value="0">Chọn...</option>
+                        <option value="1">Cứng</option>
+                        <option value="2">Mềm</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputEmail1">Khổ giấy</label>
+                    <select class="form-control" name="khoGiay">
+                        <option>Chọn...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputEmail1">Ngày xuất bản</label>
+                    <input class="form-control" id="ngayXuatBan" name="ngayXuatBan" type="date">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="exampleInputEmail1">Loại giấy</label>
+                    <select class="form-control" name="loaiGiay">
+                        <option>Chọn...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputEmail1">Số trang</label>
+                    <input class="form-control" id="soTrang" name="soTrang" type="number" placeholder="Nhập số trang">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputEmail1">Giá</label>
+                    <input class="form-control" id="gia" name="gia" type="number" placeholder="Nhập giá">
+                </div>
+            </div>
+            @*anh*@
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <img id="anh1" style="width:100%; border-radius: 5px" />
+                    <a class="d-none delete" id="xoaAnh1" href="#" >Xóa</a>
+                    <div id="img1" class="upload-btn-wrapper">
+                        <button class="btn-add">Chọn ảnh</button>
+                        <input type="file" id="fileInput1" name="picture" onchange="addAnh1(this);">
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <img id="anh2" style="width:100%; border-radius: 5px" />
+                    <a class="d-none delete" id="xoaAnh2" href="#" >Xóa</a>
+                    <div id="img2" class="upload-btn-wrapper">
+                        <button class="btn-add">Chọn ảnh</button>
+                        <input type="file" id="fileInput2" name="picture" onchange="addAnh2(this);">
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <img id="anh3" style="width:100%; border-radius: 5px" />
+                    <a class="d-none delete" id="xoaAnh3" href="#" >Xóa</a>
+                    <div  id="img3" class="upload-btn-wrapper">
+                        <button class="btn-add">Chọn ảnh</button>
+                        <input type="file" id="fileInput3" name="picture" onchange="addAnh3(this);">
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <img id="anh4" style="width:100%; border-radius: 5px" />
+                    <a class="d-none delete" id="xoaAnh4" href="#" onclick="xoaAnh4();" >Xóa</a>
+                    <div  id="img4" class="upload-btn-wrapper">
+                        <button class="btn-add">Chọn ảnh</button>
+                        <input type="file" id="fileInput4" name="picture" onchange="addAnh4(this);">
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <img id="anh5" style="width:100%; border-radius: 5px" />
+                    <a class="d-none delete" id="xoaAnh5" href="#" >Xóa</a>
+                    <div id="img5" class="upload-btn-wrapper">
+                        <button class="btn-add">Chọn ảnh</button>
+                        <input type="file" id="fileInput5" name="picture" onchange="addAnh5(this);">
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <img id="anh6" style="width:100%; border-radius: 5px" />
+                    <a class="d-none delete" id="xoaAnh6" href="#">Xóa</a>
+                    <div id="img6" class="upload-btn-wrapper">
+                        <button class="btn-add">Chọn ảnh</button>
+                        <input type="file" id="fileInput6" name="picture" onchange="addAnh6(this);">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" name="luuLai">Lưu lại</button>
+            <a href="/Administrator/SanPham" class="btn btn-secondary">Trở về</a>
+        </form>
+    </div>
+</main>
+@section scripts{
+    <script>
+        //add Tac gia
+        $('[name="tacGia"]').change(function () {
+            if ($('[name="tacGia"]').val() === "m") {
+                $("#addTacGia").removeClass('d-none');
+            }
+            else {
+                $("#addTacGia").addClass('d-none');
+            }
+        });
+
+
+        //add Nha xuat ban
+        $('[name="nhaXuatBan"]').change(function () {
+            if ($('[name="nhaXuatBan"]').val() === "m") {
+                $("#addNhaXuatBan").removeClass('d-none');
+            }
+            else {
+                $("#addNhaXuatBan").addClass('d-none');
+            }
+        });
+        //add Danh Muc
+        $('[name="danhMuc"]').change(function () {
+            if ($('[name="danhMuc"]').val() === "m") {
+                $("#addDanhMuc").removeClass('d-none');
+            }
+            else {
+                $("#addDanhMuc").addClass('d-none');
+            }
+        });
+        //add ảnh
+        //1
+        function addAnh1(input) {
+            if (input.files && input.files[0]) {
+                var fildr = new FileReader();
+                fildr.onload = function (e) {
+                    $('#anh1').attr('src', e.target.result);
+                    $('#xoaAnh1').removeClass('d-none');
+                    $('#img1').addClass('d-none');
+                }
+                fildr.readAsDataURL(input.files[0]);
+                $()
+            }
+
+        }
+        //2
+        function addAnh2(input) {
+            if (input.files && input.files[0]) {
+                var fildr = new FileReader();
+                fildr.onload = function (e) {
+                    $('#anh2').attr('src', e.target.result);
+                    $('#xoaAnh2').removeClass('d-none');
+                    $('#img2').addClass('d-none');
+                }
+                fildr.readAsDataURL(input.files[0]);
+            }
+        }
+        //3
+        function addAnh3(input) {
+            if (input.files && input.files[0]) {
+                var fildr = new FileReader();
+                fildr.onload = function (e) {
+                    $('#anh3').attr('src', e.target.result);
+                    $('#xoaAnh3').removeClass('d-none');
+                    $('#img3').addClass('d-none');
+                }
+                fildr.readAsDataURL(input.files[0]);
+            }
+        }
+        //4
+        function addAnh4(input) {
+            if (input.files && input.files[0]) {
+                var fildr = new FileReader();
+                fildr.onload = function (e) {
+                    $('#anh4').attr('src', e.target.result);
+                    $('#xoaAnh4').removeClass('d-none');
+                    $('#img4').addClass('d-none');
+                }
+                fildr.readAsDataURL(input.files[0]);
+            }
+        }
+        //5
+        function addAnh5(input) {
+            if (input.files && input.files[0]) {
+                var fildr = new FileReader();
+                fildr.onload = function (e) {
+                    $('#anh5').attr('src', e.target.result);
+                    $('#xoaAnh5').removeClass('d-none');
+                    $('#img5').addClass('d-none');
+                }
+                fildr.readAsDataURL(input.files[0]);
+            }
+        }
+        //6
+        function addAnh6(input) {
+            if (input.files && input.files[0]) {
+                var fildr = new FileReader();
+                fildr.onload = function (e) {
+                    $('#anh6').attr('src', e.target.result);
+                    $('#xoaAnh6').removeClass('d-none');
+                    $('#img6').addClass('d-none');
+                }
+                fildr.readAsDataURL(input.files[0]);
+            }
+        }
+        //xóa ảnh
+
+    </script>
+}
+
