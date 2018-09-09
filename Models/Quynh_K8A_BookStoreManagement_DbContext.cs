@@ -8,7 +8,7 @@ namespace Models
     public partial class Quynh_K8A_BookStoreManagement_DbContext : DbContext
     {
         public Quynh_K8A_BookStoreManagement_DbContext()
-            : base("name=Quynh_K8A_BookStoreManagement_DbContext")
+            : base("name=Quynh_K8A_BookStoreManagement_DbContext1")
         {
         }
 
@@ -23,6 +23,7 @@ namespace Models
         public virtual DbSet<HoaDonXuat> HoaDonXuat { get; set; }
         public virtual DbSet<KhachHang> KhachHang { get; set; }
         public virtual DbSet<KhuVuc> KhuVuc { get; set; }
+        public virtual DbSet<KhuyenMai> KhuyenMai { get; set; }
         public virtual DbSet<NhaCungCap> NhaCungCap { get; set; }
         public virtual DbSet<NhanVien> NhanVien { get; set; }
         public virtual DbSet<NhaXuatBan> NhaXuatBan { get; set; }
@@ -132,6 +133,10 @@ namespace Models
 
             modelBuilder.Entity<Sach>()
                 .HasOptional(e => e.DanhGiaSach)
+                .WithRequired(e => e.Sach);
+
+            modelBuilder.Entity<Sach>()
+                .HasOptional(e => e.KhuyenMai)
                 .WithRequired(e => e.Sach);
 
             modelBuilder.Entity<Sach>()

@@ -142,6 +142,15 @@ create table DanhGiaSach
 )
 ALTER TABLE DanhGiaSach ADD CONSTRAINT pk_dgs_s FOREIGN KEY (MaS) REFERENCES Sach(MaS)
 
+Create table KhuyenMai
+(
+	MaS int Primary key,
+	KhuyenMai float not null,
+	BatDau date not null,
+	KetThuc date not null,
+	TenSuKien nvarchar(300) 
+)
+ALTER TABLE KhuyenMai ADD CONSTRAINT pk_km_s FOREIGN KEY (MaS) REFERENCES Sach(MaS)
 
 Create table Kho
 (

@@ -44,6 +44,8 @@ namespace Models
 
         public virtual DoTuoi DoTuoi { get; set; }
 
+        public virtual KhuyenMai KhuyenMai { get; set; }
+
         public virtual NhaXuatBan NhaXuatBan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
