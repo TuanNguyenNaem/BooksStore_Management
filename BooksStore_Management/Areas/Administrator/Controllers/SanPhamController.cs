@@ -226,9 +226,9 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
                         image[i] = filename;
                     }
                 }
-                var sach = context.Sach.FirstOrDefault(c=>c.MaS == idSach);
-                var ctSach = context.CTSach.FirstOrDefault(c=>c.MaS == idSach);
-                var anhSach = context.AnhSach.FirstOrDefault(c=>c.MaS == idSach);
+                var sach = context.Sach.FirstOrDefault(c => c.MaS == idSach);
+                var ctSach = context.CTSach.FirstOrDefault(c => c.MaS == idSach);
+                var anhSach = context.AnhSach.FirstOrDefault(c => c.MaS == idSach);
 
                 //update Sach
                 sach.MaDT = doTuoi;
@@ -295,12 +295,18 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
                 context.SaveChanges();
 
                 //Update AnhSach
-                anhSach.Anh1 = "/Content/Images/" + image[0];
-                anhSach.Anh2 = "/Content/Images/" + image[1];
-                anhSach.Anh3 = "/Content/Images/" + image[2];
-                anhSach.Anh4 = "/Content/Images/" + image[3];
-                anhSach.Anh5 = "/Content/Images/" + image[4];
-                anhSach.Anh6 = "/Content/Images/" + image[5];
+                if (image[0] != null)
+                    anhSach.Anh1 = "/Content/Images/" + image[0];
+                if (image[1] != null)
+                    anhSach.Anh2 = "/Content/Images/" + image[1];
+                if (image[2] != null)
+                    anhSach.Anh3 = "/Content/Images/" + image[2];
+                if (image[3] != null)
+                    anhSach.Anh4 = "/Content/Images/" + image[3];
+                if (image[4] != null)
+                    anhSach.Anh5 = "/Content/Images/" + image[4];
+                if (image[5] != null)
+                    anhSach.Anh6 = "/Content/Images/" + image[5];
                 context.SaveChanges();
             }
             return Redirect("/Administrator/SanPham");
