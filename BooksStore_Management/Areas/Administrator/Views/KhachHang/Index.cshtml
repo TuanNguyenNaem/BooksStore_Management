@@ -1,0 +1,191 @@
+﻿@model List<Models.KhachHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+<main class="app-content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Danh sách khách hàng</h1>
+            <p>Thông tin khách hàng</p>
+        </div>
+        <div class="app-breadcrumb breadcrumb side">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addKhachHang">Thêm mới</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>Tên đăng nhập</th>
+                                <th>Họ tên</th>
+                                <th>Giới tính</th>
+                                <th>Ngày sinh</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Loại Vip</th>
+                                <th>Tình trạng</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                var ns = "";
+                                if(@item.NgaySinh.ToString()!= "")
+                                {
+                                    ns = @item.NgaySinh.ToString();
+                                    ns = DateTime.Parse(ns).ToString("dd-MM-yyyy");
+                                }
+                                <tr>
+                                    <td><a href="/Administrator/KhachHang/ChinhSua/@item.MaKH">@item.TKKhachHang.TenTK</a></td>
+                                    <td>@item.TenKh</td>
+                                    <td>@item.GioiTinh</td>
+                                    <td>@ns</td>
+                                    <td>@item.Sdt</td>
+                                    <td>@item.DiaChi</td>
+                                    <td>@item.Vip.TenVip</td>
+                                    <td>@item.TinhTrang</td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary" name="datLai">Dặt lại</a>
+                                        <a href="/Administrator/KhachHang/Xoa/@item.MaKH" class="btn btn-danger" name="sua">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<input type="hidden" name="hidden" />
+
+@Html.Partial("PartialViewAddKhachHang")
+@section scripts{
+    <script src="~/Areas/Administrator/Content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Administrator/Content/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script type="text/javascript">
+        if (document.location.hostname == 'pratikborsadiya.in') {
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-72504830-1', 'auto');
+            ga('send', 'pageview');
+        }
+        @*validate add khách hàng*@
+        function validationAddKhachHang() {
+            if ($('[name="tenDangNhap"]').val() == "") {
+                $('[name="tenDangNhap"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="matKhau"]').val() == "") {
+                $('[name="matKhau"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="nhapLaiMK"]').val() == "") {
+                $('[name="nhapLaiMK"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="tenKhachHang"]').val() == "") {
+                $('[name="tenKhachHang"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="soDienThoai"]').val() == "") {
+                $('[name="soDienThoai"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="email"]').val() == "") {
+                $('[name="email"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="diaChi"]').val() == "") {
+                $('[name="diaChi"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="loaiVip"]').val() == "0") {
+                $('[name="loaiVip"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="tinhTrang"]').val() == "") {
+                $('[name="tinhTrang"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="nhapLaiMK"]').val() != $('[name="matKhau"]').val()) {
+                $('[name="nhapLaiMK"]').css('border-color', 'red');
+                return false;
+            }
+            return true;
+        }
+        $('[name="tenDangNhap"]').keyup(function () {
+            $('[name="tenDangNhap"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="matKhau"]').keyup(function () {
+            $('[name="matKhau"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="nhapLaiMK"]').keyup(function () {
+            $('[name="nhapLaiMK"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="tenKhachHang"]').keyup(function () {
+            $('[name="tenKhachHang"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="soDienThoai"]').keyup(function () {
+            $('[name="soDienThoai"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="email"]').keyup(function () {
+            $('[name="email"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="diaChi"]').keyup(function () {
+            $('[name="diaChi"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="loaiVip"]').keyup(function () {
+            $('[name="loaiVip"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="tinhTrang"]').keyup(function () {
+            $('[name="tinhTrang"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+
+        //Add khach hàng
+        $('[name="addKhachHang"]').click(function () {
+            if (!validationAddKhachHang())
+                return false
+            else {
+                var data = {
+                    tenDangNhap: $('[name="tenDangNhap"]').val(),
+                    matKhau: $('[name="matKhau"]').val(),
+                    tenKhachHang: $('[name="tenKhachHang"]').val(),
+                    gioiTinh: $('[name="gioiTinh"]').val(),
+                    ngaySinh: $('[name="ngaySinh"]').val(),
+                    soDienThoai: $('[name="soDienThoai"]').val(),
+                    email: $('[name="email"]').val(),
+                    diaChi: $('[name="diaChi"]').val(),
+                    loaiVip: $('[name="loaiVip"]').val(),
+                    tinhTrang: $('[name="tinhTrang"]').val()
+                };
+                $.ajax({
+                    url: "/KhachHang/Create",
+                    type: 'POST',
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if (result.Status) {
+                            window.location.href = "/Administrator/KhachHang/Index";
+                        } else {
+                            alert("Trùng tên");
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}
+

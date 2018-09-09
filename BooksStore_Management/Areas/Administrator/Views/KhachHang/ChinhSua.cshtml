@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "ChinhSua";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    List<Models.Vip> vip = ViewBag.VIP;
+    Models.KhachHang khachHang = ViewBag.KhachHang;
+    string nS = "";
+    if (khachHang.NgaySinh.ToString() != "")
+    {
+        nS = khachHang.NgaySinh.ToString();
+        nS = DateTime.Parse(nS).ToString("yyyy-MM-dd");
+    }
+}
+<main class="app-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên đăng nhập</label>
+                    <input type="text" class="form-control" name="tenDangNhap" value="@khachHang.TKKhachHang.TenTK" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên Khách hàng</label>
+                    <input type="text" class="form-control" name="tenKhachHang" value="@khachHang.TenKh" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Giới tính</label>
+                    <select class="form-control" name="gioiTinh">
+                        <option value="">Chọn...</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                        <option value="Khác">Khác</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Ngày sinh</label>
+                    <input type="date" class="form-control" name="ngaySinh" value="@nS" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Số điện thoại</label>
+                    <input type="text" class="form-control" name="soDienThoai" value="@khachHang.Sdt" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" name="email" value="@khachHang.Email" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Địa chỉ</label>
+                    <input type="text" class="form-control" name="diaChi" value="@khachHang.DiaChi" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Loại VIP</label>
+                    <select class="form-control" name="loaiVip">
+                        <option value="0">Chọn...</option>
+                        @foreach (var item in vip)
+                        {
+                            <option value="@item.MaVip">@item.TenVip</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tình trạng</label>
+                    <select class="form-control" name="tinhTrang">
+                        <option value="0">Chọn...</option>
+                        <option value="Hoạt động">Hoạt động</option>
+                        <option value="Khóa">Khóa</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <a href="/Administrator/KhachHang/Index" class="btn btn-secondary" data-dismiss="modal">Trở về</a>
+        <button type="button" class="btn btn-primary" name="updateKhachHang">Lưu lại</button>
+    </div>
+</main>
+<input type="hidden" name="idKhachHang" value="@khachHang.MaKH" />
+<input type="hidden" name="gioi_Tinh" value="@khachHang.GioiTinh" />
+<input type="hidden" name="loai_Vip" value="@khachHang.MaVip" />
+<input type="hidden" name="tinh_Trang" value="@khachHang.TinhTrang" />
+
+@section scripts{
+    <script>
+        $('[name="gioiTinh"]').val($('[name="gioi_Tinh"]').val());
+        $('[name="loaiVip"]').val($('[name="loai_Vip"]').val());
+        $('[name="tinhTrang"]').val($('[name="tinh_Trang"]').val());
+
+        @*validate update khách hàng*@
+        function validationUpdateKhachHang() {
+            if ($('[name="tenKhachHang"]').val() == "") {
+                $('[name="tenKhachHang"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="soDienThoai"]').val() == "") {
+                $('[name="soDienThoai"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="email"]').val() == "") {
+                $('[name="email"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="diaChi"]').val() == "") {
+                $('[name="diaChi"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="loaiVip"]').val() == "0") {
+                $('[name="loaiVip"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="tinhTrang"]').val() == "0") {
+                $('[name="tinhTrang"]').css('border-color', 'red');
+                return false;
+            }
+            return true;
+        }
+        $('[name="tenKhachHang"]').keyup(function () {
+            $('[name="tenKhachHang"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="soDienThoai"]').keyup(function () {
+            $('[name="soDienThoai"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="email"]').keyup(function () {
+            $('[name="email"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="diaChi"]').keyup(function () {
+            $('[name="diaChi"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="loaiVip"]').keyup(function () {
+            $('[name="loaiVip"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="tinhTrang"]').keyup(function () {
+            $('[name="tinhTrang"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+
+        //Add nhà cung cấp
+        $('[name="updateKhachHang"]').click(function () {
+            if (!validationUpdateKhachHang())
+                return false
+            else {
+                var data = {
+                    idKhachHang: $('[name="idKhachHang"]').val(),
+                    tenKhachHang: $('[name="tenKhachHang"]').val(),
+                    gioiTinh: $('[name="gioiTinh"]').val(),
+                    ngaySinh: $('[name="ngaySinh"]').val(),
+                    soDienThoai: $('[name="soDienThoai"]').val(),
+                    email: $('[name="email"]').val(),
+                    diaChi: $('[name="diaChi"]').val(),
+                    loaiVip: $('[name="loaiVip"]').val(),
+                    tinhTrang: $('[name="tinhTrang"]').val()
+                };
+                $.ajax({
+                    url: "/KhachHang/ChinhSua",
+                    type: 'POST',
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if (result.Status) {
+                            window.location.href = "/Administrator/KhachHang/Index";
+                        } else {
+                            alert("Trùng tên");
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}
+
