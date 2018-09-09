@@ -206,6 +206,7 @@
     <Compile Include="Areas\Administrator\Controllers\NhaXuatBanController.cs" />
     <Compile Include="Areas\Administrator\Controllers\SanPhamController.cs" />
     <Compile Include="Areas\Administrator\Controllers\TacGiaController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\VipController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -406,6 +407,9 @@
     <Content Include="Areas\Administrator\Views\KhachHang\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\KhachHang\PartialViewAddKhachHang.cshtml" />
     <Content Include="Areas\Administrator\Views\KhachHang\ChinhSua.cshtml" />
+    <Content Include="Areas\Administrator\Views\Vip\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Vip\PartialViewAddVip.cshtml" />
+    <Content Include="Areas\Administrator\Views\Vip\ChinhSua.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

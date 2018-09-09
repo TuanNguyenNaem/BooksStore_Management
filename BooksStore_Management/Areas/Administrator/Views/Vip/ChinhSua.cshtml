@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "ChinhSua";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    Models.Vip vip = ViewBag.Vip;
+}
+
+
+<main class="app-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên loại vip</label>
+                    <input type="text" class="form-control" name="tenLoaiVip" value="@vip.TenVip" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Giới hạn đạt</label>
+                    <input type="number" class="form-control" name="moc" value="@vip.Moc">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Giảm hóa đơn</label>
+                    <input type="number" class="form-control" name="giamHoaDon" id="giamHoaDon" value="@vip.UuDai" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" name="chinhSua">Lưu lại</button>
+                <a href="/Administrator/Vip/Index" type="button" class="btn btn-dark" name="troVe">Back</a>
+            </div>
+        </div>
+    </div>
+</main>
+<input type="hidden" name="maVip" value="@vip.MaVip" />
+@section scripts{
+    <script type="text/javascript">
+        @*validate update vip*@
+        function validationUpdateVip() {
+            if ($('[name="tenLoaiVip"]').val() == "") {
+                $('[name="tenLoaiVip"]').css('border-color', 'red');
+                $('[name="tenLoaiVip"]').focus();
+                return false;
+            }
+            if ($('[name="moc"]').val() == "") {
+                $('[name="moc"]').css('border-color', 'red');
+                return false;
+            }
+            if ($('[name="giamHoaDon"]').val() == "") {
+                $('[name="giamHoaDon"]').css('border-color', 'red');
+                return false;
+            }
+            return true;
+        }
+        $('[name="tenLoaiVip"]').keyup(function () {
+            $('[name="tenLoaiVip"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="moc"]').keyup(function () {
+            $('[name="moc"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        $('[name="giamHoaDon"]').keyup(function () {
+            $('[name="giamHoaDon"]').css("border-color", "rgba(85, 85, 85, 0.3)");
+        });
+        //update
+        $('[name="chinhSua"]').click(function () {
+            if (!validationUpdateVip())
+                return false
+            else
+            {
+                var data = {
+                    maVip: $('[name="maVip"]').val(),
+                    tenLoaiVip: $('[name="tenLoaiVip"]').val(),
+                    moc: $('[name="moc"]').val(),
+                    giamHoaDon: $('[name="giamHoaDon"]').val()
+                };
+                $.ajax({
+                    url: "/Vip/Edit",
+                    type: 'POST',
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if (result.Status) {
+                                window.location.href = "/Administrator/Vip/Index";
+                        } else {
+                            alert("Trùng tên");
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+}
+
