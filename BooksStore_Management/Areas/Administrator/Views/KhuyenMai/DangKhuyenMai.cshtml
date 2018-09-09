@@ -1,4 +1,4 @@
-﻿@model List<Models.Sach>
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
@@ -9,7 +9,7 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-th-list"></i> Thêm Khuyến mại</h1>
+            <h1><i class="fa fa-th-list"></i> Danh sách khuyến mại</h1>
         </div>
     </div>
     <div class="row">
@@ -24,29 +24,26 @@
                                 <th>Tên danh mục</th>
                                 <th>Độ tuổi</th>
                                 <th>Nhà xuất bản</th>
-                                <th></th>
+                                <th>Giảm giá</th>
+                                <th>Bắt đầu</th>
+                                <th>Kết thúc</th>
+                                <th>Sự kiện</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in khuyenMai)
                             {
                                 var kM = khuyenMai.FirstOrDefault(c => c.MaS == item.MaS && DateTime.Now >= c.BatDau && DateTime.Now <= c.KetThuc);
                                 <tr>
-                                    <td>@item.CTSach.TenS</td>
-                                    <td>@item.TacGia.TenTG</td>
-                                    <td>@item.DanhMuc.TenDM</td>
-                                    <td>@item.DoTuoi.BatDau - @item.DoTuoi.KetThuc</td>
-                                    <td>@item.NhaXuatBan.TenNXB</td>
-                                    <td>
-                                        @if (kM != null)
-                                        {
-                                            <button class="btn btn-dark disabled"  type="button">+ Khuyến Mại</button>
-                                        }
-                                        else
-                                        {
-                                            <a href="/Administrator/KhuyenMai/ThemMoi/@item.MaS" class="btn btn-dark" >+ Khuyến Mại</a>
-                                        }
-                                    </td>
+                                    <td><a href="#">@item.Sach.CTSach.TenS</a></td>
+                                    <td>@item.Sach.TacGia.TenTG</td>
+                                    <td>@item.Sach.DanhMuc.TenDM</td>
+                                    <td>@item.Sach.DoTuoi.BatDau-@item.Sach.DoTuoi.KetThuc</td>
+                                    <td>@item.Sach.NhaXuatBan.TenNXB</td>
+                                    <td>@item.KhuyenMai1</td>
+                                    <td>@item.BatDau.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.KetThuc.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.TenSuKien</td>
                                 </tr>
                             }
                         </tbody>
@@ -74,4 +71,3 @@
         }
     </script>
 }
-

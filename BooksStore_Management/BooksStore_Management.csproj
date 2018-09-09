@@ -414,6 +414,8 @@
     <Content Include="Areas\Administrator\Views\KhuyenMai\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\SanPham\PartialViewGiamGia.cshtml" />
     <Content Include="Areas\Administrator\Views\SanPham\PartialViewGiamGiaCreate.cshtml" />
+    <Content Include="Areas\Administrator\Views\KhuyenMai\ThemMoi.cshtml" />
+    <Content Include="Areas\Administrator\Views\KhuyenMai\DangKhuyenMai.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
