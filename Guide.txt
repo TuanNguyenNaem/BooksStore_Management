@@ -1,5 +1,15 @@
 Clone and open program.
 Open SQL server and run file 'CSDL.sql'.
+	Note: 
+		If it was running earlier. 
+		Please delete the old database and run again.
+		To check if it was running before. 
+			The first, open SQL Server> Databases. 
+			The next, Search for "BookStore_QueenMin". If it exists, it has been run before.
+				Right-click and choose Delete. 
+				Select "Close existing connections". 
+				Click button "OK".
+				Delete database complete.
 Open file Web.config (BookStore_Management).
 Edit connectionStrings tag.
 	Copy SQL server name . 
