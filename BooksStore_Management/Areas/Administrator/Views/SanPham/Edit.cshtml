@@ -47,6 +47,8 @@
 <main class="app-content">
     <div class="container">
         <form action="/SanPham/Edit" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" name="idSach" value="@sach.MaS" />
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="exampleInputEmail1">Tên sách</label>
@@ -106,15 +108,15 @@
                     <input type="hidden" id="add_DanhMuc" name="add_DanhMuc" value="false" />
                 </div>
             </div>
-            @Html.Partial("PartialViewAddNhaXuatBan");
-            @Html.Partial("PartialViewAddDanhMuc");
+            @Html.Partial("PartialViewAddNhaXuatBan")
+            @Html.Partial("PartialViewAddDanhMuc")
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="exampleInputEmail1">Loại bìa</label>
                     <select class="form-control" name="loaiBia">
                         <option value="0">Chọn...</option>
-                        <option value="1">Cứng</option>
-                        <option value="2">Mềm</option>
+                        <option value="Cứng">Cứng</option>
+                        <option value="Mềm">Mềm</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
@@ -139,7 +141,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="exampleInputEmail1">Ngày xuất bản</label>
-                    <input class="form-control" id="ngayXuatBan" name="ngayXuatBan" type="date">
+                    <input class="form-control" id="ngayXuatBan" name="ngayXuatBan" type="date" value="@sach.CTSach.NgayXuatBan.ToString("yyyy-MM-dd")">
                 </div>
             </div>
             <div class="row">
@@ -147,8 +149,8 @@
                     <label for="exampleInputEmail1">Loại giấy</label>
                     <select class="form-control" name="loaiGiay">
                         <option>Chọn...</option>
-                        <option>Thường</option>
-                        <option>Đẹp</option>
+                        <option value="Thường">Thường</option>
+                        <option value="Đẹp">Đẹp</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
@@ -157,11 +159,11 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="exampleInputEmail1">Giá</label>
-                    <input class="form-control" id="gia" name="gia" type="number" value="@sach.CTSach.Gia">
+                    <input class="form-control" id="gia" name="gia" type="number" pattern="(d{3})([.])(d{2})" value="@sach.CTSach.Gia.ToString().Substring(0,sach.CTSach.Gia.ToString().Length - 5)" />
                 </div>
             </div>
             <div class="row">
-                <div class="form-group">
+                <div class="form-group col-md-12">
                     <label>Chi tiết</label>
                     <textarea class="form-control" name="chiTiet">@sach.CTSach.ChiTiet</textarea>
                 </div>
@@ -306,8 +308,24 @@
         </form>
     </div>
 </main>
+<input type="hidden" name="idTG" value="@sach.TacGia.MaTG" />
+<input type="hidden" name="idNXB" value="@sach.NhaXuatBan.MaNXB" />
+<input type="hidden" name="idDoTuoi" value="@sach.DoTuoi.MaDT" />
+<input type="hidden" name="idDanhMuc" value="@sach.DanhMuc.MaDM" />
+<input type="hidden" name="idloaiBia" value="@sach.CTSach.LoaiBia" />
+<input type="hidden" name="idKhoGiay" value="@sach.CTSach.Kho" />
+<input type="hidden" name="idKhoGiay" value="@sach.CTSach.Kho" />
+<input type="hidden" name="idLoaiGiay" value="@sach.CTSach.LoaiGiay" />
 @section scripts{
     <script>
+        //get info
+        $('[name="tacGia"]').val($('[name="idTG"]').val());
+        $('[name="nhaXuatBan"]').val($('[name="idNXB"]').val());
+        $('[name="doTuoi"]').val($('[name="idDoTuoi"]').val());
+        $('[name="danhMuc"]').val($('[name="idDanhMuc"]').val());
+        $('[name="loaiBia"]').val($('[name="idloaiBia"]').val());
+        $('[name="khoGiay"]').val($('[name="idKhoGiay"]').val());
+        $('[name="loaiGiay"]').val($('[name="idLoaiGiay"]').val());
         //add Tac gia
         $('[name="tacGia"]').change(function () {
             if ($('[name="tacGia"]').val() === "m") {
