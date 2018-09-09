@@ -1,0 +1,72 @@
+﻿@model List<Models.Sach>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+<main class="app-content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Danh sách sản phẩm</h1>
+            <p>Thông tin tất cả sản phẩm</p>
+        </div>
+        <div class="app-breadcrumb breadcrumb side">
+            <a class="btn btn-primary" href="/Administrator/SanPham/Create">Thêm mới</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>Tên sách</th>
+                                <th>Tên tác giả</th>
+                                <th>Tên danh mục</th>
+                                <th>Độ tuổi</th>
+                                <th>Nhà xuất bản</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.CTSach.TenS</td>
+                                    <td>@item.TacGia.TenTG</td>
+                                    <td>@item.DanhMuc.TenDM</td>
+                                    <td>@item.DoTuoi.BatDau - @item.DoTuoi.KetThuc</td>
+                                    <td>@item.NhaXuatBan.TenNXB</td>
+                                    <td>
+                                        <button>+ Khuyến Mại</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section scripts{
+
+    <script src="~/Areas/Administrator/Content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Administrator/Content/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script type="text/javascript">
+        if (document.location.hostname == 'pratikborsadiya.in') {
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-72504830-1', 'auto');
+            ga('send', 'pageview');
+        }
+    </script>
+}
+

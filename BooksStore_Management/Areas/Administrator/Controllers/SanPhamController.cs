@@ -29,6 +29,7 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.Item = null;
             ViewBag.TacGia = context.TacGia.ToList();
             ViewBag.NhaXuatBan = context.NhaXuatBan.ToList();
             ViewBag.DanhMuc = context.DanhMuc.ToList();
@@ -67,7 +68,13 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
             string loaiGiay,
             int soTrang,
             string chiTiet,
-            int gia)
+            int gia,
+
+
+            double? giamGia,
+            DateTime? ngayBatDau,
+            DateTime? ngayKetThuc,
+            string tenSuKien)
         {
             if (Request.Files.Count > 0)
             {
@@ -162,6 +169,26 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
                 anhSach.Anh6 = "/Content/Images/" + image[5];
                 context.AnhSach.Add(anhSach);
                 context.SaveChanges();
+
+                //giảm giá
+                if (ngayBatDau.ToString() != "")
+                {
+                    string bD = ngayBatDau.ToString();
+                    bD = DateTime.Parse(bD).ToString();
+                    string kT = ngayKetThuc.ToString();
+                    kT = DateTime.Parse(kT).ToString();
+                    string gg = giamGia.ToString();
+                    var khuyenMai = new KhuyenMai()
+                    {
+                        MaS = sach.MaS,
+                        KhuyenMai1 = float.Parse(gg),
+                        BatDau = DateTime.Parse(bD),
+                        KetThuc = DateTime.Parse(kT),
+                        TenSuKien = tenSuKien
+                    };
+                    context.KhuyenMai.Add(khuyenMai);
+                    context.SaveChanges();
+                }
             }
             return Redirect("/Administrator/SanPham");
         }
@@ -208,7 +235,12 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
             string loaiGiay,
             int soTrang,
             string chiTiet,
-            int gia)
+            int gia,
+
+            double? giamGia,
+            DateTime? ngayBatDau,
+            DateTime? ngayKetThuc,
+            string tenSuKien)
         {
             if (Request.Files.Count > 0)
             {
@@ -308,6 +340,53 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
                 if (image[5] != null)
                     anhSach.Anh6 = "/Content/Images/" + image[5];
                 context.SaveChanges();
+
+                //giảm giá
+                if (ngayBatDau.ToString() != "")
+                {
+
+                    var kM = context.KhuyenMai.FirstOrDefault(c => c.MaS == idSach);
+                    if (kM == null)
+                    {
+                        string bD = ngayBatDau.ToString();
+                        bD = DateTime.Parse(bD).ToString();
+                        string kT = ngayKetThuc.ToString();
+                        kT = DateTime.Parse(kT).ToString();
+                        string gg = giamGia.ToString();
+                        var khuyenMai = new KhuyenMai()
+                        {
+                            MaS = sach.MaS,
+                            KhuyenMai1 = float.Parse(gg),
+                            BatDau = DateTime.Parse(bD),
+                            KetThuc = DateTime.Parse(kT),
+                            TenSuKien = tenSuKien
+                        };
+                        context.KhuyenMai.Add(khuyenMai);
+                    }
+                    else
+                    {
+                        string bD = ngayBatDau.ToString();
+                        bD = DateTime.Parse(bD).ToString();
+                        string kT = ngayKetThuc.ToString();
+                        string gg = giamGia.ToString();
+                        kT = DateTime.Parse(kT).ToString();
+                        kM.KhuyenMai1 = float.Parse(gg);
+                        kM.BatDau = DateTime.Parse(bD);
+                        kM.KetThuc = DateTime.Parse(kT);
+                        kM.TenSuKien = tenSuKien;
+                    }
+                    context.SaveChanges();
+                }
+                else
+                {
+                    var kM = context.KhuyenMai.FirstOrDefault(c => c.MaS == idSach);
+                    if (kM != null)
+                    {
+                        context.KhuyenMai.Remove(kM);
+                        context.SaveChanges();
+                    }
+                }
+
             }
             return Redirect("/Administrator/SanPham");
         }

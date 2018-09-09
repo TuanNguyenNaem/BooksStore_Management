@@ -168,6 +168,34 @@
                     <textarea class="form-control" name="chiTiet">@sach.CTSach.ChiTiet</textarea>
                 </div>
             </div>
+            @if (@sach.KhuyenMai != null)
+            {
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" id="checkGiamGia" type="checkbox" checked>
+                                Sản phẩm giảm giá
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                @Html.Partial("PartialViewGiamGia")
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" id="checkGiamGia" type="checkbox">
+                                Sản phẩm giảm giá
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                @Html.Partial("PartialViewGiamGiaCreate")
+            }
             @*anh*@
             <div class="row">
                 @if (sach.AnhSach.Anh1 == "")
@@ -361,6 +389,25 @@
                 $("#add_DanhMuc").val("false");
             }
         });
+        //Check  giảm giá
+        if ($('#checkGiamGia').is(":checked")) {
+            $('[name="addGiamGia"]').removeClass('d-none');
+        }
+        else {
+            $('[name="addGiamGia"]').addClass('d-none');
+        }
+        $('#checkGiamGia').change(function () {
+            if ($('#checkGiamGia').is(":checked")) {
+                $('#addGiamGia').removeClass('d-none');
+            }
+            else {
+                $('#addGiamGia').addClass('d-none');
+                $('[name="giamGia"]').val("");
+                $('[name="ngayBatDau"]').val("");
+                $('[name="ngayKetThuc"]').val("");
+                $('[name="tenSuKien"]').val("");
+            }
+        })
         //add ảnh
         //1
         function addAnh1(input) {

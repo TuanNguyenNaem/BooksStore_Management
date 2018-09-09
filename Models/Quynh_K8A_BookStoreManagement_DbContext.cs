@@ -8,7 +8,7 @@ namespace Models
     public partial class Quynh_K8A_BookStoreManagement_DbContext : DbContext
     {
         public Quynh_K8A_BookStoreManagement_DbContext()
-            : base("name=Quynh_K8A_BookStoreManagement_DbContext1")
+            : base("name=Quynh_K8A_BookStoreManagement_DbContext")
         {
         }
 

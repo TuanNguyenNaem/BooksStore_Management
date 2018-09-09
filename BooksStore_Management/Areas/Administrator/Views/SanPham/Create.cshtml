@@ -160,6 +160,16 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-5">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" id="checkGiamGia" type="checkbox">Sản phẩm giảm giá
+                        </label>
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("PartialViewGiamGiaCreate")
+            <div class="row">
                 <div class="form-group col-md-12">
                     <label>Chi tiết</label>
                     <textarea class="form-control" name="chiTiet"></textarea>
@@ -258,6 +268,25 @@
                 $("#add_DanhMuc").val("false");
             }
         });
+        //Check  giảm giá
+        if ($('#checkGiamGia').is(":checked")) {
+            $('[name="addGiamGia"]').removeClass('d-none');
+        }
+        else {
+            $('[name="addGiamGia"]').addClass('d-none');
+        }
+        $('#checkGiamGia').change(function () {
+            if ($('#checkGiamGia').is(":checked")) {
+                $('#addGiamGia').removeClass('d-none');
+            }
+            else {
+                $('#addGiamGia').addClass('d-none');
+                $('[name="giamGia"]').val("");
+                $('[name="ngayBatDau"]').val("");
+                $('[name="ngayKetThuc"]').val("");
+                $('[name="tenSuKien"]').val("");
+            }
+        })
         //add ảnh
         //1
         function addAnh1(input) {
