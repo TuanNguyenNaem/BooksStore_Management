@@ -28,6 +28,9 @@ namespace Models
         [StringLength(300)]
         public string Anh5 { get; set; }
 
+        [StringLength(300)]
+        public string Anh6 { get; set; }
+
         public virtual Sach Sach { get; set; }
     }
 }

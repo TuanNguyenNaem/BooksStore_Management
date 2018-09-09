@@ -1,11 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
     List<Models.TacGia> tacGia = ViewBag.TacGia;
     List<Models.NhaXuatBan> nhaXuatBan = ViewBag.NhaXuatBan;
     List<Models.DanhMuc> danhMuc = ViewBag.DanhMuc;
     List<Models.DoTuoi> doTuoi = ViewBag.DoTuoi;
+    Models.Sach sach = ViewBag.Item;
 }
 
 <style>
@@ -45,11 +46,11 @@
 </style>
 <main class="app-content">
     <div class="container">
-        <form action="/SanPham/Create" method="post" enctype="multipart/form-data">
+        <form action="/SanPham/Edit" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="exampleInputEmail1">Tên sách</label>
-                    <input class="form-control" id="tenSach" name="tenSach" type="text" placeholder="Nhập tên sách">
+                    <input class="form-control" id="tenSach" name="tenSach" type="text" value="@sach.CTSach.TenS">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="exampleInputEmail1">Tác giả</label>
@@ -105,8 +106,8 @@
                     <input type="hidden" id="add_DanhMuc" name="add_DanhMuc" value="false" />
                 </div>
             </div>
-            @Html.Partial("PartialViewAddNhaXuatBan")
-            @Html.Partial("PartialViewAddDanhMuc")
+            @Html.Partial("PartialViewAddNhaXuatBan");
+            @Html.Partial("PartialViewAddDanhMuc");
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="exampleInputEmail1">Loại bìa</label>
@@ -152,69 +153,153 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="exampleInputEmail1">Số trang</label>
-                    <input class="form-control" id="soTrang" name="soTrang" type="number" placeholder="Nhập số trang">
+                    <input class="form-control" id="soTrang" name="soTrang" type="number" value="@sach.CTSach.SoTrang">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="exampleInputEmail1">Giá</label>
-                    <input class="form-control" id="gia" name="gia" type="number" placeholder="Nhập giá">
+                    <input class="form-control" id="gia" name="gia" type="number" value="@sach.CTSach.Gia">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
                     <label>Chi tiết</label>
-                    <textarea class="form-control" name="chiTiet"></textarea>
+                    <textarea class="form-control" name="chiTiet">@sach.CTSach.ChiTiet</textarea>
                 </div>
             </div>
             @*anh*@
             <div class="row">
-                <div class="form-group col-md-2">
-                    <img id="anh1" style="width:100%; border-radius: 5px" />
-                    <a class="d-none delete" id="xoaAnh1" href="#">Xóa</a>
-                    <div id="img1" class="upload-btn-wrapper">
-                        <button class="btn-add">Chọn ảnh</button>
-                        <input type="file" id="fileInput1" name="picture" onchange="addAnh1(this);">
+                @if (sach.AnhSach.Anh1 == "")
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh1" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh1" />
+                        <a class="d-none delete" id="xoaAnh1" href="#">Xóa</a>
+                        <div id="img1" class="upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput1" name="picture" onchange="addAnh1(this);">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-2">
-                    <img id="anh2" style="width:100%; border-radius: 5px" />
-                    <a class="d-none delete" id="xoaAnh2" href="#">Xóa</a>
-                    <div id="img2" class="upload-btn-wrapper">
-                        <button class="btn-add">Chọn ảnh</button>
-                        <input type="file" id="fileInput2" name="picture" onchange="addAnh2(this);">
+                }
+                else
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh1" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh1" />
+                        <a class="delete" id="xoaAnh1" href="#">Xóa</a>
+                        <div id="img1" class="upload-btn-wrapper d-none">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput1" name="picture" onchange="addAnh1(this);">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-2">
-                    <img id="anh3" style="width:100%; border-radius: 5px" />
-                    <a class="d-none delete" id="xoaAnh3" href="#">Xóa</a>
-                    <div id="img3" class="upload-btn-wrapper">
-                        <button class="btn-add">Chọn ảnh</button>
-                        <input type="file" id="fileInput3" name="picture" onchange="addAnh3(this);">
+                }
+                @if (sach.AnhSach.Anh2 == "")
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh2" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh2" />
+                        <a class="d-none delete" id="xoaAnh2" href="#">Xóa</a>
+                        <div id="img2" class="upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput2" name="picture" onchange="addAnh2(this);">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-2">
-                    <img id="anh4" style="width:100%; border-radius: 5px" />
-                    <a class="d-none delete" id="xoaAnh4" href="#" onclick="xoaAnh4();">Xóa</a>
-                    <div id="img4" class="upload-btn-wrapper">
-                        <button class="btn-add">Chọn ảnh</button>
-                        <input type="file" id="fileInput4" name="picture" onchange="addAnh4(this);">
+                }
+                else
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh2" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh2" />
+                        <a class="delete" id="xoaAnh2" href="#">Xóa</a>
+                        <div id="img2" class="d-none upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput2" name="picture" onchange="addAnh2(this);">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-2">
-                    <img id="anh5" style="width:100%; border-radius: 5px" />
-                    <a class="d-none delete" id="xoaAnh5" href="#">Xóa</a>
-                    <div id="img5" class="upload-btn-wrapper">
-                        <button class="btn-add">Chọn ảnh</button>
-                        <input type="file" id="fileInput5" name="picture" onchange="addAnh5(this);">
+                }
+                @if (sach.AnhSach.Anh3 == "")
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh3" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh3" />
+                        <a class="d-none delete" id="xoaAnh3" href="#">Xóa</a>
+                        <div id="img3" class="upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput3" name="picture" onchange="addAnh3(this);">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-2">
-                    <img id="anh6" style="width:100%; border-radius: 5px" />
-                    <a class="d-none delete" id="xoaAnh6" href="#">Xóa</a>
-                    <div id="img6" class="upload-btn-wrapper">
-                        <button class="btn-add">Chọn ảnh</button>
-                        <input type="file" id="fileInput6" name="picture" onchange="addAnh6(this);">
+                }
+                else
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh3" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh3" />
+                        <a class="delete" id="xoaAnh3" href="#">Xóa</a>
+                        <div id="img3" class="d-none upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput3" name="picture" onchange="addAnh3(this);">
+                        </div>
                     </div>
-                </div>
+                }
+                @if (sach.AnhSach.Anh4 == "")
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh4" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh4" />
+                        <a class="d-none delete" id="xoaAnh4" href="#" onclick="xoaAnh4();">Xóa</a>
+                        <div id="img4" class="upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput4" name="picture" onchange="addAnh4(this);">
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh4" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh4" />
+                        <a class="delete" id="xoaAnh4" href="#" onclick="xoaAnh4();">Xóa</a>
+                        <div id="img4" class="d-none upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput4" name="picture" onchange="addAnh4(this);">
+                        </div>
+                    </div>
+                }
+                @if (sach.AnhSach.Anh5 == "")
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh5" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh5" />
+                        <a class="d-none delete" id="xoaAnh5" href="#">Xóa</a>
+                        <div id="img5" class="upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput5" name="picture" onchange="addAnh5(this);">
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh5" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh5" />
+                        <a class="delete" id="xoaAnh5" href="#">Xóa</a>
+                        <div id="img5" class="d-none upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput5" name="picture" onchange="addAnh5(this);">
+                        </div>
+                    </div>
+                }
+                @if (sach.AnhSach.Anh6 == "")
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh6" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh6" />
+                        <a class="d-none delete" id="xoaAnh6" href="#">Xóa</a>
+                        <div id="img6" class="upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput6" name="picture" onchange="addAnh6(this);">
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group col-md-2">
+                        <img id="anh6" style="width:100%; border-radius: 5px" src="@sach.AnhSach.Anh6" />
+                        <a class="delete" id="xoaAnh6" href="#">Xóa</a>
+                        <div id="img6" class="d-none upload-btn-wrapper">
+                            <button class="btn-add">Chọn ảnh</button>
+                            <input type="file" id="fileInput6" name="picture" onchange="addAnh6(this);">
+                        </div>
+                    </div>
+                }
             </div>
             <button type="submit" class="btn btn-primary" name="luuLai">Lưu lại</button>
             <a href="/Administrator/SanPham" class="btn btn-secondary">Trở về</a>

@@ -66,6 +66,7 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
             DateTime ngayXuatBan,
             string loaiGiay,
             int soTrang,
+            string chiTiet,
             int gia)
         {
             if (Request.Files.Count > 0)
@@ -149,16 +150,34 @@ namespace BooksStore_Management.Areas.Administrator.Controllers
                 ctSach.SoTrang = soTrang;
                 ctSach.Gia = gia;
                 ctSach.LoaiGiay = loaiGiay;
+                ctSach.ChiTiet = chiTiet;
                 context.CTSach.Add(ctSach);
                 context.SaveChanges();
 
-                anhSach.Anh1 = "~/Content/Images/" + image[0];
-                anhSach.Anh2 = "~/Content/Images/" + image[1];
-                anhSach.Anh3 = "~/Content/Images/" + image[2];
-                anhSach.Anh4 = "~/Content/Images/" + image[3];
-                anhSach.Anh5 = "~/Content/Images/" + image[4];
+                anhSach.Anh1 = "/Content/Images/" + image[0];
+                anhSach.Anh2 = "/Content/Images/" + image[1];
+                anhSach.Anh3 = "/Content/Images/" + image[2];
+                anhSach.Anh4 = "/Content/Images/" + image[3];
+                anhSach.Anh5 = "/Content/Images/" + image[4];
+                anhSach.Anh6 = "/Content/Images/" + image[5];
                 context.AnhSach.Add(anhSach);
+                context.SaveChanges();
             }
+            return Redirect("/Administrator/SanPham");
+        }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            ViewBag.Item = context.Sach.FirstOrDefault(c => c.MaS == id);
+            ViewBag.TacGia = context.TacGia.ToList();
+            ViewBag.NhaXuatBan = context.NhaXuatBan.ToList();
+            ViewBag.DanhMuc = context.DanhMuc.ToList();
+            ViewBag.DoTuoi = context.DoTuoi.ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Edit()
+        {
             return Redirect("/Administrator/SanPham");
         }
     }

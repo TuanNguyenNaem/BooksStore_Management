@@ -37,6 +37,9 @@ namespace Models
         [Column(TypeName = "money")]
         public decimal Gia { get; set; }
 
+        [StringLength(3000)]
+        public string ChiTiet { get; set; }
+
         public virtual Sach Sach { get; set; }
     }
 }

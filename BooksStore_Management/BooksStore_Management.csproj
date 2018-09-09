@@ -337,6 +337,14 @@
     <Content Include="Content\images\wi.png" />
     <Content Include="Content\images\wi1.png" />
     <Content Include="Content\images\wi2.png" />
+    <Content Include="Content\images\スクリーンショット %2828%29.png" />
+    <Content Include="Content\images\スクリーンショット %2830%29.png" />
+    <Content Include="Content\images\スクリーンショット %2831%29.png" />
+    <Content Include="Content\images\スクリーンショット %2832%29.png" />
+    <Content Include="Content\images\スクリーンショット %2833%29.png" />
+    <Content Include="Content\images\スクリーンショット %2834%29.png" />
+    <Content Include="Content\images\スクリーンショット %2835%29.png" />
+    <Content Include="Content\images\スクリーンショット %2836%29.png" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\easing.js" />
     <Content Include="Content\js\easyResponsiveTabs.js" />
@@ -393,6 +401,7 @@
     <Content Include="Areas\Administrator\Views\NhaXuatBan\PartialViewAddNhaXuatBan.cshtml" />
     <Content Include="Areas\Administrator\Views\NhaXuatBan\ChinhSua.cshtml" />
     <Content Include="Areas\Administrator\Views\SanPham\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\SanPham\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

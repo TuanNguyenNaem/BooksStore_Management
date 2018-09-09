@@ -118,18 +118,20 @@ Create table CTSach
 	Kho varchar(10) not null,
 	SoTrang int Not null,
 	LoaiGiay nvarchar(30) not null,
-	Gia money Not null
+	Gia money Not null,
+	ChiTiet nvarchar(3000)
 )
 ALTER TABLE CTSach ADD CONSTRAINT pk_cts_s FOREIGN KEY (MaS) REFERENCES Sach(MaS)
 
 create table AnhSach
 (
 	MaS int Primary key,
-	Anh1 varchar(300),
-	Anh2 varchar(300),
-	Anh3 varchar(300),
-	Anh4 varchar(300),
-	Anh5 varchar(300)
+	Anh1 nvarchar(300),
+	Anh2 nvarchar(300),
+	Anh3 nvarchar(300),
+	Anh4 nvarchar(300),
+	Anh5 nvarchar(300),
+	Anh6 nvarchar(300)
 )
 ALTER TABLE AnhSach ADD CONSTRAINT pk_as_s FOREIGN KEY (MaS) REFERENCES Sach(MaS)
 

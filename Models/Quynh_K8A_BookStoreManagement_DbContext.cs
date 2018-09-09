@@ -35,26 +35,6 @@ namespace Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AnhSach>()
-                .Property(e => e.Anh1)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AnhSach>()
-                .Property(e => e.Anh2)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AnhSach>()
-                .Property(e => e.Anh3)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AnhSach>()
-                .Property(e => e.Anh4)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AnhSach>()
-                .Property(e => e.Anh5)
-                .IsUnicode(false);
-
             modelBuilder.Entity<CTSach>()
                 .Property(e => e.Kho)
                 .IsUnicode(false);
