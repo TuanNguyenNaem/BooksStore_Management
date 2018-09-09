@@ -1,0 +1,18 @@
+Clone and open program.
+Open SQL server and run file 'CSDL.sql'.
+Open file Web.config (BookStore_Management).
+Edit connectionStrings tag.
+	Copy SQL server name . 
+	Edit "source= SQL Server name"
+	Example: "<add name="Quynh_K8A_BookStoreManagement_DbContext" connectionString="data source=DESKTOP-MJFP3D3\NGUYENTUAN;initial catalog=BookStore_QueenMin;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />"
+		"DESKTOP-MJFP3D3\NGUYENTUAN" is my server name
+Run program.
+
+url:
+localhost:xxxxx/Administrator/DangNhap/Index (Administrator page)
+localhost:xxxxx (Customers page)
+
+Login
+username: TuanNV37
+password: 123456
+
